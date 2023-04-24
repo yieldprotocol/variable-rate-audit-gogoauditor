@@ -121,7 +121,7 @@ contract VRLadle is UUPSUpgradeable, AccessControl {
         require(join.asset() == asset, "Mismatched asset and join");
         joins[assetId] = join;
 
-        _addToken(asset, true); // address(0) disables the token
+        _addToken(asset, true);
         emit JoinAdded(assetId, address(join));
     }
 
