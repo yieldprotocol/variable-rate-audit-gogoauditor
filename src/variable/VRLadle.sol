@@ -48,6 +48,7 @@ contract VRLadle is UUPSUpgradeable, AccessControl {
 
         // See https://medium.com/immunefi/wormhole-uninitialized-proxy-bugfix-review-90250c41a43a
         initialized = true; // Lock the implementation contract
+        _revokeRole(ROOT, msg.sender); // Remove the deployer's ROOT role
     }
 
     // ---- Upgradability ----
