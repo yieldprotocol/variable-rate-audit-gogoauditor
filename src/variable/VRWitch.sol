@@ -23,6 +23,7 @@ contract VRWitch is WitchBase, UUPSUpgradeable {
     constructor(ICauldron cauldron_, ILadle ladle_) WitchBase(cauldron_, ladle_) {
         // See https://medium.com/immunefi/wormhole-uninitialized-proxy-bugfix-review-90250c41a43a
         initialized = true; // Lock the implementation contract
+        _revokeRole(ROOT, msg.sender); // Remove the deployer's ROOT role
     }
 
     // ======================================================================
@@ -41,7 +42,6 @@ contract VRWitch is WitchBase, UUPSUpgradeable {
 
         _grantRole(ROOT, root_);   // Grant ROOT
         _setRoleAdmin(LOCK, LOCK);      // Create the LOCK role by setting itself as its own admin, creating an independent role tree
-        _revokeRole(ROOT, msg.sender); // Remove the deployer's ROOT role
     }
 
     /// @dev Allow to set a new implementation
